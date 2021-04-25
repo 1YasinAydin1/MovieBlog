@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EFblogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="adminTable">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="blogDetailImage">
+    <Key>
+      <PropertyRef Name="blogImageID" />
+    </Key>
+    <Property Name="blogImageID" Type="Guid" Nullable="false" />
+    <Property Name="blogImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="blogID" Type="Guid" />
+    <NavigationProperty Name="blogTable" Relationship="Self.FK_blogDetailImage_blogTable" FromRole="blogDetailImage" ToRole="blogTable" />
+  </EntityType>
+  <EntityType Name="blogTable">
+    <Key>
+      <PropertyRef Name="blogID" />
+    </Key>
+    <Property Name="blogID" Type="Guid" Nullable="false" />
+    <Property Name="blogTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="blogContent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="blogCategory" Type="Int32" />
+    <Property Name="blogType" Type="Int32" />
+    <Property Name="blogDateTime" Type="DateTime" Precision="3" />
+    <Property Name="blogImageCover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="blogDetailImage" Relationship="Self.FK_blogDetailImage_blogTable" FromRole="blogTable" ToRole="blogDetailImage" />
+    <NavigationProperty Name="categoryTable" Relationship="Self.FK_blogTable_categoryTable" FromRole="blogTable" ToRole="categoryTable" />
+    <NavigationProperty Name="typeTable" Relationship="Self.FK_blogTable_typeTable" FromRole="blogTable" ToRole="typeTable" />
+    <NavigationProperty Name="commentTable" Relationship="Self.FK_commentTable_blogTable" FromRole="blogTable" ToRole="commentTable" />
+  </EntityType>
+  <EntityType Name="categoryTable">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="blogTable" Relationship="Self.FK_blogTable_categoryTable" FromRole="categoryTable" ToRole="blogTable" />
+  </EntityType>
+  <EntityType Name="commentTable">
+    <Key>
+      <PropertyRef Name="commentID" />
+    </Key>
+    <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="commentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="commentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="commentContent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="commentBlogID" Type="Guid" />
+    <NavigationProperty Name="blogTable" Relationship="Self.FK_commentTable_blogTable" FromRole="commentTable" ToRole="blogTable" />
+  </EntityType>
+  <EntityType Name="typeTable">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="blogTable" Relationship="Self.FK_blogTable_typeTable" FromRole="typeTable" ToRole="blogTable" />
+  </EntityType>
+  <Association Name="FK_blogDetailImage_blogTable">
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="0..1" />
+    <End Role="blogDetailImage" Type="Self.blogDetailImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogTable">
+        <PropertyRef Name="blogID" />
+      </Principal>
+      <Dependent Role="blogDetailImage">
+        <PropertyRef Name="blogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_blogTable_categoryTable">
+    <End Role="categoryTable" Type="Self.categoryTable" Multiplicity="0..1" />
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoryTable">
+        <PropertyRef Name="categoryID" />
+      </Principal>
+      <Dependent Role="blogTable">
+        <PropertyRef Name="blogCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_blogTable_typeTable">
+    <End Role="typeTable" Type="Self.typeTable" Multiplicity="0..1" />
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeTable">
+        <PropertyRef Name="typeID" />
+      </Principal>
+      <Dependent Role="blogTable">
+        <PropertyRef Name="blogType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_commentTable_blogTable">
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="0..1" />
+    <End Role="commentTable" Type="Self.commentTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogTable">
+        <PropertyRef Name="blogID" />
+      </Principal>
+      <Dependent Role="commentTable">
+        <PropertyRef Name="commentBlogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EFblogEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="adminTable" EntityType="Self.adminTable" />
+    <EntitySet Name="blogDetailImage" EntityType="Self.blogDetailImage" />
+    <EntitySet Name="blogTable" EntityType="Self.blogTable" />
+    <EntitySet Name="categoryTable" EntityType="Self.categoryTable" />
+    <EntitySet Name="commentTable" EntityType="Self.commentTable" />
+    <EntitySet Name="typeTable" EntityType="Self.typeTable" />
+    <AssociationSet Name="FK_blogDetailImage_blogTable" Association="Self.FK_blogDetailImage_blogTable">
+      <End Role="blogTable" EntitySet="blogTable" />
+      <End Role="blogDetailImage" EntitySet="blogDetailImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_blogTable_categoryTable" Association="Self.FK_blogTable_categoryTable">
+      <End Role="categoryTable" EntitySet="categoryTable" />
+      <End Role="blogTable" EntitySet="blogTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_blogTable_typeTable" Association="Self.FK_blogTable_typeTable">
+      <End Role="typeTable" EntitySet="typeTable" />
+      <End Role="blogTable" EntitySet="blogTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_commentTable_blogTable" Association="Self.FK_commentTable_blogTable">
+      <End Role="blogTable" EntitySet="blogTable" />
+      <End Role="commentTable" EntitySet="commentTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

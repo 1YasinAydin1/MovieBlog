@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EFblogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="adminTable">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminName" Type="varchar" MaxLength="50" />
+    <Property Name="adminPassword" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="blogDetailImage">
+    <Key>
+      <PropertyRef Name="blogImageID" />
+    </Key>
+    <Property Name="blogImageID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="blogImagePath" Type="varchar(max)" />
+    <Property Name="blogID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="blogTable">
+    <Key>
+      <PropertyRef Name="blogID" />
+    </Key>
+    <Property Name="blogID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="blogTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="blogContent" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="blogCategory" Type="int" />
+    <Property Name="blogType" Type="int" />
+    <Property Name="blogDateTime" Type="datetime" />
+    <Property Name="blogImageCover" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="categoryTable">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="commentTable">
+    <Key>
+      <PropertyRef Name="commentID" />
+    </Key>
+    <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="commentName" Type="varchar" MaxLength="50" />
+    <Property Name="commentEmail" Type="varchar" MaxLength="50" />
+    <Property Name="commentContent" Type="varchar" MaxLength="50" />
+    <Property Name="commentBlogID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="typeTable">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typeName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_blogDetailImage_blogTable">
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="0..1" />
+    <End Role="blogDetailImage" Type="Self.blogDetailImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogTable">
+        <PropertyRef Name="blogID" />
+      </Principal>
+      <Dependent Role="blogDetailImage">
+        <PropertyRef Name="blogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_blogTable_categoryTable">
+    <End Role="categoryTable" Type="Self.categoryTable" Multiplicity="0..1" />
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoryTable">
+        <PropertyRef Name="categoryID" />
+      </Principal>
+      <Dependent Role="blogTable">
+        <PropertyRef Name="blogCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_blogTable_typeTable">
+    <End Role="typeTable" Type="Self.typeTable" Multiplicity="0..1" />
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeTable">
+        <PropertyRef Name="typeID" />
+      </Principal>
+      <Dependent Role="blogTable">
+        <PropertyRef Name="blogType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_commentTable_blogTable">
+    <End Role="blogTable" Type="Self.blogTable" Multiplicity="0..1" />
+    <End Role="commentTable" Type="Self.commentTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogTable">
+        <PropertyRef Name="blogID" />
+      </Principal>
+      <Dependent Role="commentTable">
+        <PropertyRef Name="commentBlogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EFblogModelStoreContainer">
+    <EntitySet Name="adminTable" EntityType="Self.adminTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="blogDetailImage" EntityType="Self.blogDetailImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="blogTable" EntityType="Self.blogTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="categoryTable" EntityType="Self.categoryTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="commentTable" EntityType="Self.commentTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="typeTable" EntityType="Self.typeTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_blogDetailImage_blogTable" Association="Self.FK_blogDetailImage_blogTable">
+      <End Role="blogTable" EntitySet="blogTable" />
+      <End Role="blogDetailImage" EntitySet="blogDetailImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_blogTable_categoryTable" Association="Self.FK_blogTable_categoryTable">
+      <End Role="categoryTable" EntitySet="categoryTable" />
+      <End Role="blogTable" EntitySet="blogTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_blogTable_typeTable" Association="Self.FK_blogTable_typeTable">
+      <End Role="typeTable" EntitySet="typeTable" />
+      <End Role="blogTable" EntitySet="blogTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_commentTable_blogTable" Association="Self.FK_commentTable_blogTable">
+      <End Role="blogTable" EntitySet="blogTable" />
+      <End Role="commentTable" EntitySet="commentTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EFblogModelStoreContainer" CdmEntityContainer="EFblogEntities">
+    <EntitySetMapping Name="adminTable">
+      <EntityTypeMapping TypeName="EFblogModel.adminTable">
+        <MappingFragment StoreEntitySet="adminTable">
+          <ScalarProperty Name="adminID" ColumnName="adminID" />
+          <ScalarProperty Name="adminName" ColumnName="adminName" />
+          <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="blogDetailImage">
+      <EntityTypeMapping TypeName="EFblogModel.blogDetailImage">
+        <MappingFragment StoreEntitySet="blogDetailImage">
+          <ScalarProperty Name="blogImageID" ColumnName="blogImageID" />
+          <ScalarProperty Name="blogImagePath" ColumnName="blogImagePath" />
+          <ScalarProperty Name="blogID" ColumnName="blogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="blogTable">
+      <EntityTypeMapping TypeName="EFblogModel.blogTable">
+        <MappingFragment StoreEntitySet="blogTable">
+          <ScalarProperty Name="blogID" ColumnName="blogID" />
+          <ScalarProperty Name="blogTitle" ColumnName="blogTitle" />
+          <ScalarProperty Name="blogContent" ColumnName="blogContent" />
+          <ScalarProperty Name="blogCategory" ColumnName="blogCategory" />
+          <ScalarProperty Name="blogType" ColumnName="blogType" />
+          <ScalarProperty Name="blogDateTime" ColumnName="blogDateTime" />
+          <ScalarProperty Name="blogImageCover" ColumnName="blogImageCover" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categoryTable">
+      <EntityTypeMapping TypeName="EFblogModel.categoryTable">
+        <MappingFragment StoreEntitySet="categoryTable">
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commentTable">
+      <EntityTypeMapping TypeName="EFblogModel.commentTable">
+        <MappingFragment StoreEntitySet="commentTable">
+          <ScalarProperty Name="commentID" ColumnName="commentID" />
+          <ScalarProperty Name="commentName" ColumnName="commentName" />
+          <ScalarProperty Name="commentEmail" ColumnName="commentEmail" />
+          <ScalarProperty Name="commentContent" ColumnName="commentContent" />
+          <ScalarProperty Name="commentBlogID" ColumnName="commentBlogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeTable">
+      <EntityTypeMapping TypeName="EFblogModel.typeTable">
+        <MappingFragment StoreEntitySet="typeTable">
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

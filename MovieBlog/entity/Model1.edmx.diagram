@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="967c51c83a6b462fb279c44ebe56a1d3" Name="Diagram1">
+        <EntityTypeShape EntityType="EFblogModel.adminTable" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFblogModel.blogDetailImage" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFblogModel.blogTable" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFblogModel.categoryTable" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFblogModel.commentTable" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFblogModel.typeTable" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EFblogModel.FK_blogDetailImage_blogTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EFblogModel.FK_blogTable_categoryTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EFblogModel.FK_blogTable_typeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="EFblogModel.FK_commentTable_blogTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

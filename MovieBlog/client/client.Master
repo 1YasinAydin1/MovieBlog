@@ -1,0 +1,141 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="client.master.cs" Inherits="Asp.Net_Entity_.client.client" %>
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Personal Blog a Blogging Category Flat Bootstarp  Responsive Website Template | Home :: w3layouts</title>
+	<link href="clientTheme/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="clientTheme/css/style.css" rel="stylesheet" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Personal Blog Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" 
+	/>
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!----webfonts---->
+		<link href='http://fonts.googleapis.com/css?family=Oswald:100,400,300,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<!----//webfonts---->
+		  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<!--end slider -->
+		<!--script-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="clientTheme/js/move-top.js"></script>
+    <script src="clientTheme/js/easing.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!--/script-->
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 900);
+        });
+    });
+</script>
+<!---->
+
+</head>
+<body>
+<!---header---->			
+<div class="header">  
+	 <div class="container ">
+		  <div class="logo">
+
+			  <a href="default.aspx"><img src="clientTheme/images/logo.jpg" title="" /></a>
+		  </div>
+			 <!---start-top-nav---->
+			 <div class="top-menu">
+				
+				  <span class="menu"> </span> 
+				   <ul>
+						<li class="active"><a href="default.aspx">Ana Sayfa</a></li>						
+												
+						<div class="clearfix"> </div>
+				 </ul>
+			 </ div>  
+         
+			 <div class="clearfix"></div>
+					<script>
+					    $("span.menu").click(function () {
+					        $(".top-menu ul").slideToggle("slow", function () {
+					        });
+					    });
+					</script>
+				<!---//End-top-nav---->					
+	 </div><asp:HyperLink ID="HyperLink1" NavigateUrl="../admin/adminLogin.aspx" style="border-bottom-right-radius:15px;border-bottom-left-radius:15px;background-color:#00aeff;" CssClass="py-2 px-3 text-white" runat="server">Admin Giriş</asp:HyperLink>
+  
+</div>
+<!--/header-->
+<div class="content">
+   
+     <div class="container">
+        <div class="content-grids row">
+            <div class="col-sm-12 col-md-8 content-main" >
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+              <div class="col-sm-8 col-md-3 content-right">
+                <div class="recent">
+                    <h3>Son Bloglar</h3>
+                      <ul class="mt-3">
+                        <asp:Repeater ID="Repeater2" runat="server">
+                            <ItemTemplate>
+                                <li><a href="blogDetail.aspx?blogID=<%# Eval("blogID") %>"><%# Eval("blogTitle") %> </a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+                </div>
+                <div class="comments">
+                    <h3>Son Yorumlar</h3>
+                    <ul>
+                        <asp:Repeater ID="Repeater1" runat="server"><ItemTemplate>
+                        <li><a href="blogDetail.aspx?blogID=<%# Eval("commentBlogID") %>"><%# Eval("commentName") %> - <%# Eval("commentContent") %></a></li>
+                        </ItemTemplate></asp:Repeater>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+               
+                <div class="categories">
+                    <h3>İçerik Kategorileri</h3>
+                    <ul class="mt-3">
+                        <asp:Repeater ID="Repeater3" runat="server">
+                            <ItemTemplate>
+                            <li><a href="categoryDetail.aspx?categoryID=<%# Eval("categoryID") %>"><%# Eval("categoryName") %> </a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+                </div>
+
+                <div class="categories mt-5">
+                    <h3>İçerik Türleri</h3>
+                    <ul class="mt-3">
+                        <asp:Repeater ID="Repeater4" runat="server">
+                            <ItemTemplate>
+                                 <li><a href="typeDetail.aspx?typeID=<%# Eval("typeID") %>"><%# Eval("typeName") %> </a></li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+       
+</div>
+<!---->
+<div class="footer">
+	 <div class="container">
+	 <p>Copyrights © 2021 Tüm Blog Hakları Saklıdır | Template by <a href="http://w3layouts.com/">W3layouts</a></p>
+	 </div>
+</div>
+    </body>
+</html>
+	
